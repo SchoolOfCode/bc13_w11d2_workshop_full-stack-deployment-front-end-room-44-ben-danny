@@ -18,7 +18,7 @@ function App() {
     async function getShoppingList() {
       const response = await fetch(`${url}/items`);
       const data = await response.json(response);
-      console.log(data);
+      // console.log(data);
       setList(data.payload);
     }
     getShoppingList();
@@ -30,7 +30,7 @@ function App() {
       item: newListItem,
       completed: false,
     };
-
+    console.log ("dot", listItemWithoutId.payload[0].completed)
     const response = await fetch(`${url}/items`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -60,9 +60,19 @@ function App() {
         return item.id !== idOfTickedItem
           ? item
           : { ...item, completed: !item.completed };
+        });
       });
-    });
-  }
+    }
+   
+
+  // async function markAsCompleted(doneOrNotDone) {
+  //   const response = await fetch(`${url}/items`, {
+  //        method: "PATCH", /////////////
+  //        headers: { "Content-Type": "application/json" },
+  //        body: JSON.stringify({ completed: doneOrNotDone}),
+  //      } )
+  //    }
+   
 
   return (
     <section>
